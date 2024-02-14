@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'home-background': "url('img/home_background.png')",
-        'games-background': "url('img/games_background.png')",
-        'about-background': "url('img/about_background.png')"
+        'home-background': "url('/img/home_background.png')",
+        'games-background': "url('/img/games_background.png')",
+        'about-background': "url('/img/about_background.png')"
       },
       fontFamily: {
         'kanit': ['Kanit']
