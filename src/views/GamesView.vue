@@ -3,12 +3,11 @@ import { ref } from 'vue';
 import { RadioGroup, RadioGroupOption } from '@headlessui/vue'
 import { PlusIcon, ArrowDownTrayIcon, PencilIcon, MinusIcon, ArrowUpTrayIcon } from '@heroicons/vue/24/outline';
 import { Game } from '../classes'
+import { RouterLink } from 'vue-router';
 
 // Placeholder games, they must be loaded from db
 const games = [
-  new Game("Everybody Edits Offline", "1.0.0", "ee"),
-  new Game("Project M", "1.1.1", "pm"),
-  new Game("Operation K8", "2.0.0-3", "k8"),
+  new Game("No game created...", "", "no_game", "/img/no_game.png")
 ], game = ref(0)
 </script>
 
@@ -23,21 +22,22 @@ const games = [
               <RadioGroupOption v-slot="{ checked }" v-for="game, index in games" :value="index">
                 <a :class="'block w-full px-4 h-8 leading-8 rounded-lg cursor-pointer' + (checked ? ' bg-zinc-600 bg-opacity-80' : '')">
                   {{ game.name }}
-                  <i class="ml-2 font-extralight">v{{ game.version }}</i>
+                  <i class="ml-2 font-extralight" v-if="game.version">v{{ game.version }}</i>
                 </a>
               </RadioGroupOption>
             </RadioGroup>
-            <!--<a class="block w-full hover:bg-zinc-600 hover:bg-opacity-90 rounded-lg" v-for="game in games">{{ game }}</a>-->
           </div>
           <div class="h-96 w-1/2 inline-flex p-6 items-center">
-            <img :src="'/img/games/' + games[game].short + '.png'" class="block h-2/3 mx-auto">
+            <img :src="games[game].logo" class="block h-2/3 mx-auto">
           </div>
         </div>
         <br>
-        <button class="bg-zinc-700 bg-opacity-80 hover:bg-zinc-600 hover:bg-opacity-90 mr-4 py-2 px-4 rounded-md shadow-lg text-lg">
-          <PlusIcon class="w-full h-8"/>
-          Create
-        </button>
+        <RouterLink to="/games/new">
+          <button class="bg-zinc-700 bg-opacity-80 hover:bg-zinc-600 hover:bg-opacity-90 mr-4 py-2 px-4 rounded-md shadow-lg text-lg">
+            <PlusIcon class="w-full h-8"/>
+            Create
+          </button>
+        </RouterLink>
         <button class="bg-zinc-700 bg-opacity-80 hover:bg-zinc-600 hover:bg-opacity-90 mr-4 py-2 px-4 rounded-md shadow-lg text-lg">
           <ArrowDownTrayIcon class="w-full h-8"/>
           Import
